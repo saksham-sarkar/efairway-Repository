@@ -21,7 +21,7 @@ public class HeaderFacadeImpl implements HeaderFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(HeaderFacadeImpl.class);
     @Override
     public ReadableHeader getHeaderDetails(Integer id) {
-        ReadableHeader readableHeader = null;
+        ReadableHeader readableHeader;
         try {
             Header header = headerService.getHeaderDetails(id);
             if (header == null) {
@@ -38,6 +38,7 @@ public class HeaderFacadeImpl implements HeaderFacade {
 
     private ReadableHeader getHeader(Header header, ReadableHeader readableHeader){
         readableHeader.setLogo(header.getLogo());
+        readableHeader.setMenuLogo(header.getMenuLogo());
         readableHeader.setSearchLabel(header.getSearchLabel());
         TopLinkSection contactUs = new TopLinkSection(header.getContactUsLabel(), header.getContactUsLink());
         TopLinkSection callUs = new TopLinkSection(header.getCallUsLabel(), header.getCallUsLink());
@@ -49,7 +50,7 @@ public class HeaderFacadeImpl implements HeaderFacade {
 
     @Override
     public ReadableHeader updateHeaderDetails(Integer id, ReadableHeader readableHeader) {
-        ReadableHeader headerResponse = null;
+        ReadableHeader headerResponse;
         try {
             Header header = headerService.getHeaderDetails(id);
             if (header == null) {
@@ -66,6 +67,7 @@ public class HeaderFacadeImpl implements HeaderFacade {
             Header headerEntity = new Header();
             headerEntity.setId(id);
             headerEntity.setLogo(readableHeader.getLogo());
+            headerEntity.setMenuLogo(readableHeader.getMenuLogo());
             headerEntity.setSearchLabel(readableHeader.getSearchLabel());
             headerEntity.setContactUsLink(readableHeader.getTopLinks().getContactUs().getLink());
             headerEntity.setContactUsLabel(readableHeader.getTopLinks().getContactUs().getLabel());
